@@ -1,0 +1,120 @@
+﻿@page
+@model UnitConverter.Pages.QuickConversions
+@{
+    ViewData["Title"] = "Quick Conversions";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+
+<div>
+    <h1>Quick Conversions</h1>
+    <a asp-page="/Index" class="btn btn-secondary">Back to Index</a>
+</div>
+
+<div>
+    <!-- Miles to Kilometers -->
+    <div>
+        <form method="get" asp-page-handler="@ConversionTypes.MilesToKilometers">
+            <div>
+                <label for="inputMiles" class="form-label">Miles to Kilometers</label>
+                <input id="inputMiles" name="input" type="text" class="form-control"/>
+            </div>
+            <button type="submit" class="btn btn-primary">Convert</button>
+        </form>
+    </div>
+</div>
+
+<!-- Kilometers to Miles -->
+<div>
+    <div>
+        <form method="get" asp-page-handler="@ConversionTypes.KilometersToMiles">
+            <div>
+                <label for="inputKm" class="form-label">Kilometers to Miles</label>
+                <input id="inputKm" name="input" type="number" step="any" class="form-control"/>
+            </div>
+            <button type="submit" class="btn btn-primary">Convert</button>
+        </form>
+    </div>
+</div>
+
+<div>
+    <div>
+        <form method="get" asp-page-handler="@ConversionTypes.FahrenheitToCelsius">
+            <div>
+                <label for="inputFah" class="form-label">Fahrenheit to Celsius</label>
+                <textarea id="inputFah" name="input" class="form-control" rows="1"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Convert</button>
+        </form>
+    </div>
+</div>
+
+<div>
+    <div>
+        <form method="get" asp-page-handler="@ConversionTypes.CelsiusToFahrenheit">
+            <div>
+                <label for="inputCel" class="form-label">Celsius to Fahrenheit (-40 C to 100 C)</label>
+                <input id="inputCel" name="input" type="range" class="form-range" min="-40" max="100" value="0" oninput="this.nextElementSibling,value = this.value"/>
+                <output>0</output>
+            </div>
+            <button type="submit" class="btn btn-primary">Convert</button>
+        </form>
+    </div>
+</div>
+
+<div>
+    <div>
+        <form method="get" asp-page-handler="@ConversionTypes.PoundsToKilograms">
+            <div>
+                <label for="selectPounds" class="form-label">Pounds to Kilograms</label>
+                <select id="selectPounds" name="input" class="form-select" asp-items="Model.PoundOptions"></select>
+            </div>
+            <button type="submit" class="btn btn-primary">Convert</button>
+        </form>
+    </div>
+</div>
+
+<div>
+    <div>
+        <form method="get" asp-page-handler="@ConversionTypes.KilogramsToPounds">
+            <div>
+                <label for="inputKg" class="form-label">Kilograms to Pounds</label>
+                <input id="inputKg" name="input" type="number" min="0" step="0.2" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-primary">Convert</button>
+        </form>
+    </div>
+</div>
+
+<div>
+    <div>
+        <form method="get" asp-page-handler="@ConversionTypes.TablespoonToTeaspoon">
+            <div>
+                <label for="inputTbsp" class="form-label">Tablespoon to Teaspoon</label>
+                <input id="inputTbsp" name="input" type="number" step="any" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-primary">Convert</button>
+        </form>
+    </div>
+</div>
+
+<div>
+    <div>
+        <form method="get" asp-page-handler="@ConversionTypes.TeaspoonToTablespoon">
+            <div>
+                <label for="inputTsp" class="form-label">Teaspoon to Tablespoon</label>
+                <input id="inputTsp" name="input" type="number" step="any" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-primary">Convert</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
