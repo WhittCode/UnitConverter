@@ -1,26 +1,34 @@
 ﻿@page
-@model UnitConverter.Pages.QuickConversions
+@model UnitConverter.Pages.QuickConversionsModel
 @{
-    ViewData["Title"] = "Quick Conversions";
+ViewData["Title"] = "Quick Conversions";
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title></title>
-</head>
-<body>
 
 <div>
     <h1>Quick Conversions</h1>
     <a asp-page="/Index" class="btn btn-secondary">Back to Index</a>
 </div>
 
+<div class="mt-3">
+    @if (!string.IsNullOrEmpty(Model.Output))
+    {
+    <div class="alert alert-success" role="status">
+        <strong>Result:</strong> @Model.Output
+    </div>
+    }
+
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+    <div class="alert alert-danger" role="alert">
+        @Model.ErrorMessage
+    </div>
+    }
+</div>
+
 <div>
     <!-- Miles to Kilometers -->
     <div>
-        <form method="get" asp-page-handler="@ConversionTypes.MilesToKilometers">
+        <form method="get" asp-page="/QuickConversions" asp-page-handler="MilesToKilometers">
             <div>
                 <label for="inputMiles" class="form-label">Miles to Kilometers</label>
                 <input id="inputMiles" name="input" type="text" class="form-control"/>
@@ -33,7 +41,7 @@
 <!-- Kilometers to Miles -->
 <div>
     <div>
-        <form method="get" asp-page-handler="@ConversionTypes.KilometersToMiles">
+        <form method="get" asp-page="/QuickConversions" asp-page-handler="KilometersToMiles">
             <div>
                 <label for="inputKm" class="form-label">Kilometers to Miles</label>
                 <input id="inputKm" name="input" type="number" step="any" class="form-control"/>
@@ -45,7 +53,7 @@
 
 <div>
     <div>
-        <form method="get" asp-page-handler="@ConversionTypes.FahrenheitToCelsius">
+        <form method="get" asp-page="/QuickConversions" asp-page-handler="FahrenheitToCelsius">
             <div>
                 <label for="inputFah" class="form-label">Fahrenheit to Celsius</label>
                 <textarea id="inputFah" name="input" class="form-control" rows="1"></textarea>
@@ -57,7 +65,7 @@
 
 <div>
     <div>
-        <form method="get" asp-page-handler="@ConversionTypes.CelsiusToFahrenheit">
+        <form method="get" asp-page="/QuickConversions" asp-page-handler="CelsiusToFahrenheit">
             <div>
                 <label for="inputCel" class="form-label">Celsius to Fahrenheit (-40 C to 100 C)</label>
                 <input id="inputCel" name="input" type="range" class="form-range" min="-40" max="100" value="0" oninput="this.nextElementSibling,value = this.value"/>
@@ -70,7 +78,7 @@
 
 <div>
     <div>
-        <form method="get" asp-page-handler="@ConversionTypes.PoundsToKilograms">
+        <form method="get" asp-page="/QuickConversions" asp-page-handler="PoundsToKilograms">
             <div>
                 <label for="selectPounds" class="form-label">Pounds to Kilograms</label>
                 <select id="selectPounds" name="input" class="form-select" asp-items="Model.PoundOptions"></select>
@@ -82,7 +90,7 @@
 
 <div>
     <div>
-        <form method="get" asp-page-handler="@ConversionTypes.KilogramsToPounds">
+        <form method="get" asp-page="/QuickConversions" asp-page-handler="KilogramsToPounds">
             <div>
                 <label for="inputKg" class="form-label">Kilograms to Pounds</label>
                 <input id="inputKg" name="input" type="number" min="0" step="0.2" class="form-control" />
@@ -94,7 +102,7 @@
 
 <div>
     <div>
-        <form method="get" asp-page-handler="@ConversionTypes.TablespoonToTeaspoon">
+        <form method="get" asp-page="/QuickConversions" asp-page-handler="TablespoonToTeaspoon">
             <div>
                 <label for="inputTbsp" class="form-label">Tablespoon to Teaspoon</label>
                 <input id="inputTbsp" name="input" type="number" step="any" class="form-control" />
@@ -106,7 +114,7 @@
 
 <div>
     <div>
-        <form method="get" asp-page-handler="@ConversionTypes.TeaspoonToTablespoon">
+        <form method="get" asp-page="/QuickConversions" asp-page-handler="TeaspoonToTablespoon">
             <div>
                 <label for="inputTsp" class="form-label">Teaspoon to Tablespoon</label>
                 <input id="inputTsp" name="input" type="number" step="any" class="form-control" />
@@ -115,6 +123,3 @@
         </form>
     </div>
 </div>
-
-</body>
-</html>
