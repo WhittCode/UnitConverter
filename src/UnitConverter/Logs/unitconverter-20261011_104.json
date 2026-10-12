@@ -1,0 +1,4 @@
+{"@t":"2026-10-11T16:16:53.9237253Z","@m":"Application started. Press Ctrl+C to shut down.","@i":"dcaefe54","SourceContext":"Microsoft.Hosting.Lifetime"}
+{"@t":"2026-10-11T16:16:53.9818595Z","@m":"Hosting environment: \"Development\"","@i":"bc5a1a4e","EnvName":"Development","SourceContext":"Microsoft.Hosting.Lifetime"}
+{"@t":"2026-10-11T16:16:53.9821396Z","@m":"Content root path: \"C:\\Users\\whitt\\RiderProjects\\UnitConverter\\src\\UnitConverter\"","@i":"cc26f24e","ContentRoot":"C:\\Users\\whitt\\RiderProjects\\UnitConverter\\src\\UnitConverter","SourceContext":"Microsoft.Hosting.Lifetime"}
+{"@t":"2026-10-11T16:16:54.1434689Z","@m":"Application is shutting down...","@i":"90f52c38","SourceContext":"Microsoft.Hosting.Lifetime"}

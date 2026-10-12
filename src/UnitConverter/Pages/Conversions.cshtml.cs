@@ -20,14 +20,12 @@ public class ConversionsModel : PageModel
 
     public string ErrorMessage { get; set; } = string.Empty;
 
-
     public void OnGet()
     {
         if (PageContext?.ViewData != null)
         {
             ViewData["Title"] = "Conversions";
         }
-
 
         if (RouteData?.Values != null)
         {
@@ -37,7 +35,6 @@ public class ConversionsModel : PageModel
             if (!string.IsNullOrEmpty(routeConversionType)) ConversionType = routeConversionType;
             if (!string.IsNullOrEmpty(routeInput)) Input = routeInput;
         }
-
 
         if (Conversion != null)
         {
@@ -53,11 +50,9 @@ public class ConversionsModel : PageModel
             Input = "3.1415";
         }
 
-
         if (Conversion == null) Conversion = new ConversionModel();
         Conversion.ConversionType = ConversionType;
         Conversion.Input = Input;
-
 
         if (PageContext?.ViewData != null)
         {
@@ -73,7 +68,6 @@ public class ConversionsModel : PageModel
             ViewData["Title"] = "Conversions";
         }
 
-
         if (!double.TryParse(Input, out double numInput))
         {
             ErrorMessage = "Input must be a number.";
@@ -83,7 +77,6 @@ public class ConversionsModel : PageModel
 
         try
         {
-
             Output = ConversionType.ToLower() switch
             {
                 "milestokilometers" => new UnitOf.Length().FromMiles(numInput).ToKilometers().ToString(),
@@ -108,13 +101,13 @@ public class ConversionsModel : PageModel
             ErrorMessage = "An error occurred during calculation.";
         }
 
-
         if (PageContext?.ViewData != null && !string.IsNullOrEmpty(ErrorMessage))
         {
             ViewData["ErrorMessage"] = ErrorMessage;
         }
     }
 }
+
 
 
 

@@ -1,0 +1,102 @@
+﻿@page
+@model UnitConverter.Pages.LogsModel
+@{
+    ViewData["Title"] = "Diagnostic Logs";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Application Diagnostic Logs</h1>
+        <a asp-page="/Index" class="btn btn-secondary">Back to Home</a>
+    </div>
+
+    <!-- Filter Control Form Grid -->
+    <form method="get" class="row g-3 p-3 bg-light border rounded mb-4">
+        <div class="col-md-3">
+            <label asp-for="Level" class="form-label font-weight-bold">Log Level</label>
+            <select asp-for="Level" class="form-select">
+                <option value="">All Levels</option>
+                <option value="Information">Information</option>
+                <option value="Warning">Warning</option>
+                <option value="Error">Error</option>
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <label asp-for="ConversionType" class="form-label font-weight-bold">Conversion Type</label>
+            <select asp-for="ConversionType" class="form-select">
+                <option value="">All Conversions</option>
+                <option value="MilesToKilometers">MilesToKilometers</option>
+                <option value="KilometersToMiles">KilometersToMiles</option>
+                <option value="FahrenheitToCelsius">FahrenheitToCelsius</option>
+                <option value="CelsiusToFahrenheit">CelsiusToFahrenheit</option>
+                <option value="PoundsToKilograms">PoundsToKilograms</option>
+                <option value="KilogramsToPounds">KilogramsToPounds</option>
+                <option value="TablespoonToTeaspoon">TablespoonToTeaspoon</option>
+                <option value="TeaspoonToTablespoon">TeaspoonToTablespoon</option>
+            </select>
+        </div>
+
+        <div class="col-md-4">
+            <label asp-for="Search" class="form-label font-weight-bold">Search Message Text</label>
+            <input type="text" asp-for="Search" class="form-control" placeholder="Type a keyword..." />
+        </div>
+
+        <div class="col-md-2 d-flex align-items-end gap-2">
+            <button type="submit" class="btn btn-primary w-100">Filter</button>
+            <a asp-page="/Logs" class="btn btn-outline-secondary w-100">Clear</a>
+        </div>
+    </form>
+
+    <!-- Results Table Layout -->
+    @if (Model.Entries.Count == 0)
+    {
+        <div class="alert alert-warning text-center" role="alert">
+            <strong>No matching log entries found.</strong> Try clearing your active filters or submitting more conversions on the Quick Conversions page.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive border rounded">
+            <table class="table table-striped table-hover mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Timestamp</th>
+                        <th scope="col">Level</th>
+                        <th scope="col">Rendered Message</th>
+                        <th scope="col">Conversion</th>
+                        <th scope="col">Input</th>
+                        <th scope="col">Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var entry in Model.Entries)
+                    {
+                        <tr>
+                            <td class="text-nowrap small">@entry.Timestamp.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                            <td>
+                                <span class="badge @(entry.Level == "Error" ? "bg-danger" : entry.Level == "Warning" ? "bg-warning text-dark" : "bg-info")">
+                                    @entry.Level
+                                </span>
+                            </td>
+                            <td>
+                                <div>@entry.Message</div>
+                                @if (!string.IsNullOrEmpty(entry.Exception))
+                                {
+                                    <details class="mt-2 text-danger">
+                                        <summary class="small cursor-pointer">View Stack Exception Trace</summary>
+                                        <pre class="bg-light p-2 border rounded small mt-1 text-wrap" style="max-height: 200px; overflow-y: auto;">@entry.Exception</pre>
+                                    </details>
+                                }
+                            </td>
+                            <td class="text-muted font-monospace small">@entry.ConversionType</td>
+                            <td>@entry.Input</td>
+                            <td><strong>@entry.Result</strong></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+
